@@ -7,68 +7,80 @@ export default function GameAssets() {
     {
       id: 1,
       category: "Karakter",
-      name: "Cyber Warrior Ultra Pack",
-      description: "Model karakter humanoid premium dengan gaya cyberpunk. Paket ini mencakup rigging lengkap, tekstur PBR 4K, dan 12 animasi dasar (idle, run, jump, attack). Cocok untuk game action RPG atau shooter.",
+      name: "Main Character & Enemy Animation Pack",
+      description: "Model karakter dengan tema adventure dan model enemy monster ataupun hewan yang buas. Sudah mencakup Animasi lengkap (idle, run, jump, attack).",
       currentImg: 0,
       images: [
         "https://placehold.co/1200x800/064e3b/ffffff?text=Cyber+Warrior+Preview+1",
         "https://placehold.co/1200x800/065f46/ffffff?text=Cyber+Warrior+Preview+2",
         "https://placehold.co/1200x800/047857/ffffff?text=Cyber+Warrior+Preview+3"
       ],
-      specs: ["Format: FBX, PNG", "Size: 45 MB", "Polygons: 25k", "Rigged: Yes"],
-      downloadUrl: "#"
+      specs: ["Format: PNG", "Size: 188 KB", "Pixel: Yes"],
+      downloadUrl: "/Character.zip"
     },
     {
       id: 2,
       category: "Environment",
-      name: "Lost Forest - Master Scene",
-      description: "Environment set lengkap bertema hutan misterius. Sudah termasuk sistem pepohonan modular, ground textures, fog particles, dan lighting preset untuk Unity/Unreal Engine.",
+      name: "Block Set, Background, dan Obstacle Pack",
+      description: "Environment set lengkap bertema hutan misterius. Termasuk Background (Foreground, Midground, Background), Block set dengan rerumputan hijau, serta obstacle yang harus dilewati pemain.",
       currentImg: 0,
       images: [
         "https://placehold.co/1200x800/1e3a1f/ffffff?text=Lost+Forest+Preview+1",
         "https://placehold.co/1200x800/2d4a22/ffffff?text=Lost+Forest+Preview+2",
         "https://placehold.co/1200x800/14532d/ffffff?text=Lost+Forest+Preview+3"
       ],
-      specs: ["Format: UnityPackage, Blend", "Size: 120 MB", "PBR: Yes", "Modular: Yes"],
-      downloadUrl: "#"
+      specs: ["Format: PNG", "Size: 212 KB", "Pixel: Yes"],
+      downloadUrl: "/Environment.zip"
     },
-    // Penambahan Kategori 3: Item/Senjata
     {
       id: 3,
-      category: "Item & Senjata",
-      name: "Legendary Melee Collection",
-      description: "Koleksi senjata jarak dekat legendaris yang terdiri dari pedang, kapak, dan gada. Setiap senjata memiliki efek emisi (glow) yang dapat dikustomisasi warnanya.",
+      category: "Item",
+      name: "Item Interaktif",
+      description: "Berisi item yang dibutuhkan game dan juga animasi packnya seperti senjata dan equipment lainnya.",
       currentImg: 0,
       images: [
         "https://placehold.co/1200x800/312e81/ffffff?text=Sword+Collection+1",
         "https://placehold.co/1200x800/3730a3/ffffff?text=Axe+Preview+2",
         "https://placehold.co/1200x800/4338ca/ffffff?text=Hammer+Preview+3"
       ],
-      specs: ["Format: OBJ, GLB", "Size: 28 MB", "LODs: Included", "Textures: 2K"],
-      downloadUrl: "#"
+      specs: ["Format: PNG", "Size: 48,6 KB", "Pixel: Yes"],
+      downloadUrl: "/Item.zip"
     },
-    // Penambahan Kategori 4: UI Kit
     {
       id: 4,
       category: "UI Kit",
-      name: "Fantasy RPG HUD Pack",
-      description: "Antarmuka pengguna lengkap untuk game RPG. Termasuk HP/Mana bars, minimap frames, inventory slots, dan set ikon skill sebanyak 50+ buah dengan resolusi tinggi.",
+      name: "Button, Popup, dan UI Pack",
+      description: "Berisi UI pack seperti button, popup, dan juga UI mendasar pada game untuk meningkatkan user experience.",
       currentImg: 0,
       images: [
         "https://placehold.co/1200x800/831843/ffffff?text=Main+HUD+Layout",
         "https://placehold.co/1200x800/9d174d/ffffff?text=Inventory+UI+Design",
         "https://placehold.co/1200x800/be185d/ffffff?text=Skill+Icons+Preview"
       ],
-      specs: ["Format: PSD, PNG", "Size: 65 MB", "Vector: Yes", "Slicing: Ready"],
-      downloadUrl: "#"
+      specs: ["Format: PNG", "Size: 83,3 KB ", "Pixel: Yes"],
+      downloadUrl: "/UI.zip"
+    },
+    {
+      id: 5,
+      category: "Package",
+      name: "All asset download package",
+      description: "Seluruh asset yang sudah mencangkup, karakter, Environment, Item, dan UI pack yang sudah dikemas dalam satu file zip.",
+      currentImg: 0,
+      images: [
+        "https://placehold.co/1200x800/4c1d95/ffffff?text=Explosion+VFX+Preview",
+        "https://placehold.co/1200x800/5b21b6/ffffff?text=Slash+Effect+Animation",
+        "https://placehold.co/1200x800/6d28d9/ffffff?text=Dust+Particles+Preview"
+      ],
+      specs: ["Format: PNG", "Size: 125 KB", "Pixel: Yes"],
+      downloadUrl: "/Package.zip"
     }
   ]);
 
-  const handleNext = (id) => {
+  const handleNext = (id: number) => {
     setAssets(prev => prev.map(a => a.id === id ? { ...a, currentImg: (a.currentImg + 1) % a.images.length } : a));
   };
 
-  const handlePrev = (id) => {
+  const handlePrev = (id: number) => {
     setAssets(prev => prev.map(a => a.id === id ? { ...a, currentImg: (a.currentImg - 1 + a.images.length) % a.images.length } : a));
   };
 
@@ -77,14 +89,14 @@ export default function GameAssets() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-20 text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Katalog Aset Utama</h2>
-          <p className="text-gray-500 text-lg">Eksplorasi detail aset unggulan kami langsung dari engine.</p>
+          <p className="text-gray-500 text-lg">Eksplorasi seluruh detail asset game The Forest</p>
         </div>
 
-        <div className="space-y-40"> {/* Jarak antar kategori diperlebar agar fokus */}
+        <div className="space-y-40">
           {assets.map((asset) => (
             <div key={asset.id} className="flex flex-col lg:flex-row gap-16 items-start">
               
-              {/* Kiri: Slider Preview Besar */}
+              {/* Bagian Visual/Slider */}
               <div className="lg:w-3/5 w-full lg:sticky lg:top-28">
                 <div className="relative group rounded-[2.5rem] overflow-hidden shadow-2xl bg-gray-100 border-4 border-gray-50">
                   <div className="aspect-[16/10] relative">
@@ -100,13 +112,13 @@ export default function GameAssets() {
                     ))}
                   </div>
 
-                  {/* Navigasi Manual */}
+                  {/* Navigasi Panah */}
                   <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button onClick={() => handlePrev(asset.id)} className="w-14 h-14 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white text-2xl hover:bg-white hover:text-green-600 transition-all shadow-2xl">←</button>
                     <button onClick={() => handleNext(asset.id)} className="w-14 h-14 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white text-2xl hover:bg-white hover:text-green-600 transition-all shadow-2xl">→</button>
                   </div>
 
-                  {/* Indicators */}
+                  {/* Indikator Titik */}
                   <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
                     {asset.images.map((_, idx) => (
                       <div key={idx} className={`h-1.5 rounded-full transition-all duration-300 ${idx === asset.currentImg ? 'w-8 bg-white' : 'w-2 bg-white/40'}`} />
@@ -115,7 +127,7 @@ export default function GameAssets() {
                 </div>
               </div>
 
-              {/* Kanan: Detail & Download */}
+              {/* Bagian Detail Teks */}
               <div className="lg:w-2/5 w-full space-y-8">
                 <div>
                   <span className="px-5 py-2 bg-green-100 text-green-700 rounded-full text-xs font-black uppercase tracking-widest border border-green-200">
@@ -139,6 +151,7 @@ export default function GameAssets() {
                 <div className="pt-4">
                   <a 
                     href={asset.downloadUrl}
+                    download={`${asset.category}_Assets.zip`}
                     className="group relative flex items-center justify-center gap-4 bg-gray-900 text-white py-5 rounded-2xl font-bold text-lg hover:bg-green-600 transition-all overflow-hidden shadow-2xl"
                   >
                     <span className="relative z-10 flex items-center gap-3">
@@ -149,7 +162,6 @@ export default function GameAssets() {
                     </span>
                     <div className="absolute inset-0 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
                   </a>
-                  <p className="text-center text-gray-400 text-sm mt-4">Lisensi: Komersial & Personal</p>
                 </div>
               </div>
 
