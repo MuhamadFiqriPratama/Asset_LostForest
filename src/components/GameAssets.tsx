@@ -11,9 +11,9 @@ export default function GameAssets() {
       description: "Model karakter dengan tema adventure dan model enemy monster ataupun hewan yang buas. Sudah mencakup Animasi lengkap (idle, run, jump, attack).",
       currentImg: 0,
       images: [
-        "https://placehold.co/1200x800/064e3b/ffffff?text=Cyber+Warrior+Preview+1",
-        "https://placehold.co/1200x800/065f46/ffffff?text=Cyber+Warrior+Preview+2",
-        "https://placehold.co/1200x800/047857/ffffff?text=Cyber+Warrior+Preview+3"
+        "Gif_pack/Main_Character_Walk.gif",
+        "Gif_pack/Main_Character_Die.gif",
+        "Gif_pack/Enemy_Attack.gif"
       ],
       specs: ["Format: PNG", "Size: 188 KB", "Pixel: Yes"],
       downloadUrl: "/Character.zip"
@@ -25,9 +25,9 @@ export default function GameAssets() {
       description: "Environment set lengkap bertema hutan misterius. Termasuk Background (Foreground, Midground, Background), Block set dengan rerumputan hijau, serta obstacle yang harus dilewati pemain.",
       currentImg: 0,
       images: [
-        "https://placehold.co/1200x800/1e3a1f/ffffff?text=Lost+Forest+Preview+1",
-        "https://placehold.co/1200x800/2d4a22/ffffff?text=Lost+Forest+Preview+2",
-        "https://placehold.co/1200x800/14532d/ffffff?text=Lost+Forest+Preview+3"
+        "Gif_pack/Checkpoint.gif",
+        "Gif_pack/Bg-Main_Lobby.png",
+        "Gif_pack/Tilesets.png"
       ],
       specs: ["Format: PNG", "Size: 212 KB", "Pixel: Yes"],
       downloadUrl: "/Environment.zip"
@@ -39,9 +39,9 @@ export default function GameAssets() {
       description: "Berisi item yang dibutuhkan game dan juga animasi packnya seperti senjata dan equipment lainnya.",
       currentImg: 0,
       images: [
-        "https://placehold.co/1200x800/312e81/ffffff?text=Sword+Collection+1",
-        "https://placehold.co/1200x800/3730a3/ffffff?text=Axe+Preview+2",
-        "https://placehold.co/1200x800/4338ca/ffffff?text=Hammer+Preview+3"
+        "Gif_pack/Battery.gif",
+        "Gif_pack/Heart.gif",
+        "Gif_pack/Mushroom.gif"
       ],
       specs: ["Format: PNG", "Size: 48,6 KB", "Pixel: Yes"],
       downloadUrl: "/Item.zip"
@@ -53,9 +53,9 @@ export default function GameAssets() {
       description: "Berisi UI pack seperti button, popup, dan juga UI mendasar pada game untuk meningkatkan user experience.",
       currentImg: 0,
       images: [
-        "https://placehold.co/1200x800/831843/ffffff?text=Main+HUD+Layout",
-        "https://placehold.co/1200x800/9d174d/ffffff?text=Inventory+UI+Design",
-        "https://placehold.co/1200x800/be185d/ffffff?text=Skill+Icons+Preview"
+        "Gif_pack/Condition_boost.gif",
+        "Gif_pack/Pop_up.png",
+        "Gif_pack/Button_Berjajar.png"
       ],
       specs: ["Format: PNG", "Size: 83,3 KB ", "Pixel: Yes"],
       downloadUrl: "/UI.zip"
@@ -66,13 +66,9 @@ export default function GameAssets() {
       name: "All asset download package",
       description: "Seluruh asset yang sudah mencangkup, karakter, Environment, Item, dan UI pack yang sudah dikemas dalam satu file zip.",
       currentImg: 0,
-      images: [
-        "https://placehold.co/1200x800/4c1d95/ffffff?text=Explosion+VFX+Preview",
-        "https://placehold.co/1200x800/5b21b6/ffffff?text=Slash+Effect+Animation",
-        "https://placehold.co/1200x800/6d28d9/ffffff?text=Dust+Particles+Preview"
-      ],
+      images: ["Gif_pack/Tampilan_Game_Lost_Forest_2.png"], // Hanya 1 gambar untuk Package
       specs: ["Format: PNG", "Size: 125 KB", "Pixel: Yes"],
-      downloadUrl: "/Package.zip"
+      downloadUrl: "/Packaging.zip"
     }
   ]);
 
@@ -89,41 +85,55 @@ export default function GameAssets() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-20 text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Katalog Aset Utama</h2>
-          <p className="text-gray-500 text-lg">Eksplorasi seluruh detail asset game The Forest</p>
+          <p className="text-gray-500 text-lg">Eksplorasi seluruh detail asset game Lost Forest</p>
         </div>
 
         <div className="space-y-40">
           {assets.map((asset) => (
             <div key={asset.id} className="flex flex-col lg:flex-row gap-16 items-start">
               
-              {/* Bagian Visual/Slider */}
+              {/* Bagian Visual (Pratinjau Gambar) */}
               <div className="lg:w-3/5 w-full lg:sticky lg:top-28">
                 <div className="relative group rounded-[2.5rem] overflow-hidden shadow-2xl bg-gray-100 border-4 border-gray-50">
-                  <div className="aspect-[16/10] relative">
-                    {asset.images.map((img, idx) => (
-                      <img
-                        key={idx}
-                        src={img}
-                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
-                          idx === asset.currentImg ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-                        }`}
-                        alt={asset.name}
-                      />
-                    ))}
+                  {/* Aspect Ratio 16:9 sesuai resolusi 1920x1080 */}
+                  <div className="aspect-video relative">
+                    {asset.images.map((img, idx) => {
+                      // Logika untuk mengatur padding agar gambar tidak terlalu "maju/zoom"
+                      let imageStyle = "object-cover"; 
+                      
+                      if (asset.category === "Item") {
+                        imageStyle = "object-contain p-24"; // Paling mundur untuk item kecil
+                      } else if (asset.category === "UI Kit" || asset.category === "Environment") {
+                        imageStyle = "object-contain p-12"; // Mundur sedang untuk detail aset
+                      }
+
+                      return (
+                        <img
+                          key={idx}
+                          src={img}
+                          className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${
+                            idx === asset.currentImg ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                          } ${imageStyle}`}
+                          alt={asset.name}
+                        />
+                      );
+                    })}
                   </div>
 
-                  {/* Navigasi Panah */}
-                  <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button onClick={() => handlePrev(asset.id)} className="w-14 h-14 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white text-2xl hover:bg-white hover:text-green-600 transition-all shadow-2xl">←</button>
-                    <button onClick={() => handleNext(asset.id)} className="w-14 h-14 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white text-2xl hover:bg-white hover:text-green-600 transition-all shadow-2xl">→</button>
-                  </div>
-
-                  {/* Indikator Titik */}
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-                    {asset.images.map((_, idx) => (
-                      <div key={idx} className={`h-1.5 rounded-full transition-all duration-300 ${idx === asset.currentImg ? 'w-8 bg-white' : 'w-2 bg-white/40'}`} />
-                    ))}
-                  </div>
+                  {/* Navigasi: Muncul otomatis hanya jika gambar lebih dari satu (Menghilangkan slide di Package) */}
+                  {asset.images.length > 1 && (
+                    <>
+                      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button onClick={() => handlePrev(asset.id)} className="w-14 h-14 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white text-2xl hover:bg-white hover:text-green-600 transition-all shadow-2xl">←</button>
+                        <button onClick={() => handleNext(asset.id)} className="w-14 h-14 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white text-2xl hover:bg-white hover:text-green-600 transition-all shadow-2xl">→</button>
+                      </div>
+                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+                        {asset.images.map((_, idx) => (
+                          <div key={idx} className={`h-1.5 rounded-full transition-all duration-300 ${idx === asset.currentImg ? 'w-8 bg-white' : 'w-2 bg-white/40'}`} />
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
