@@ -55,7 +55,7 @@ export default function GameAssets() {
       images: [
         "Gif_pack/Condition_boost.gif",
         "Gif_pack/Pop_up.png",
-        "Gif_pack/Button_Berjajar.png"
+        "Gif_pack/Button_berjajar.png"
       ],
       specs: ["Format: PNG", "Size: 83,3 KB ", "Pixel: Yes"],
       downloadUrl: "/UI.zip"
