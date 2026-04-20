@@ -72,7 +72,6 @@ export default function GameAssets() {
     }
   ]);
 
-  // Fungsi navigasi yang dibungkus useCallback agar stabil
   const handleNext = useCallback((id: number) => {
     setAssets(prev => prev.map(a => 
       a.id === id ? { ...a, currentImg: (a.currentImg + 1) % a.images.length } : a
@@ -85,13 +84,12 @@ export default function GameAssets() {
     ));
   }, []);
 
-  // Logika Auto-Slide
   useEffect(() => {
     const intervals = assets.map(asset => {
       if (asset.images.length > 1) {
         return setInterval(() => {
           handleNext(asset.id);
-        }, 5000); // Berpindah setiap 5 detik
+        }, 5000);
       }
       return null;
     });
@@ -113,27 +111,31 @@ export default function GameAssets() {
           {assets.map((asset) => (
             <div key={asset.id} className="flex flex-col lg:flex-row gap-8 md:gap-16 items-start">
               
-              {/* Bagian Visual (Pratinjau Gambar) */}
+              {/* Bagian Visual */}
               <div className="w-full lg:w-3/5 lg:sticky lg:top-28">
                 <div className="relative group rounded-3xl md:rounded-[2.5rem] overflow-hidden shadow-xl bg-gray-50 border-2 md:border-4 border-white">
                   
-                  <div className="aspect-video relative w-full overflow-hidden">
+                  <div className="aspect-video relative w-full overflow-hidden flex items-center justify-center">
                     {asset.images.map((img, idx) => {
-                      // Penyesuaian padding responsif agar gambar tidak terpotong di HP
-                      let imageStyle = "object-contain p-6 md:p-10"; 
+                      // Penyesuaian Style Gambar - Dibuat lebih besar untuk Karakter
+                      let imageStyle = "p-6 md:p-10 scale-100"; 
                       
-                      if (asset.category === "Item") {
-                        imageStyle = "object-contain p-12 md:p-24"; 
+                      if (asset.category === "Karakter") {
+                        // Padding hampir 0 dan zoom 1.5x (150%) agar karakter sangat jelas
+                        imageStyle = "p-0 md:p-2 scale-[1.5]"; 
+                      } else if (asset.category === "Item") {
+                        imageStyle = "p-12 md:p-20 scale-110"; 
                       } else if (asset.category === "UI Kit") {
-                        imageStyle = "object-contain p-8 md:p-14"; 
+                        imageStyle = "p-6 md:p-10 scale-100"; 
                       }
 
                       return (
                         <img
                           key={idx}
                           src={img}
-                          className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${
-                            idx === asset.currentImg ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                          style={{ imageRendering: 'pixelated' }} // Menjaga pixel art tetap tajam saat di-zoom
+                          className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 ease-in-out ${
+                            idx === asset.currentImg ? 'opacity-100' : 'opacity-0'
                           } ${imageStyle}`}
                           alt={asset.name}
                         />
@@ -141,7 +143,6 @@ export default function GameAssets() {
                     })}
                   </div>
 
-                  {/* Navigasi: Muncul jika gambar > 1 */}
                   {asset.images.length > 1 && (
                     <>
                       <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 md:px-6 pointer-events-none">
@@ -159,7 +160,6 @@ export default function GameAssets() {
                         </button>
                       </div>
                       
-                      {/* Indikator Titik */}
                       <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2">
                         {asset.images.map((_, idx) => (
                           <div 
