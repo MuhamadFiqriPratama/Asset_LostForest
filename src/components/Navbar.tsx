@@ -36,8 +36,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fungsi untuk animasi scroll halus (Smooth Scroll)
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  // PERBAIKAN: Menggunakan HTMLElement agar kompatibel dengan h1, a, dan button
+  const handleNavClick = (e: React.MouseEvent<HTMLElement>, targetId: string) => {
     e.preventDefault();
     setIsOpen(false); // Tutup menu mobile jika terbuka
 
@@ -83,7 +83,6 @@ export default function Navbar() {
               }`}
             >
               {item.name}
-              {/* Garis bawah hanya muncul/melebar jika aktif */}
               <span className={`absolute -bottom-1 left-0 h-0.5 bg-green-600 transition-all duration-300 ${
                 activeSection === item.id ? 'w-full' : 'w-0'
               }`}></span>
