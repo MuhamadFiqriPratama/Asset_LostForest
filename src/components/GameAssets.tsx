@@ -117,11 +117,9 @@ export default function GameAssets() {
                   
                   <div className="aspect-video relative w-full overflow-hidden flex items-center justify-center">
                     {asset.images.map((img, idx) => {
-                      // Penyesuaian Style Gambar - Dibuat lebih besar untuk Karakter
                       let imageStyle = "p-6 md:p-10 scale-100"; 
                       
                       if (asset.category === "Karakter") {
-                        // Padding hampir 0 dan zoom 1.5x (150%) agar karakter sangat jelas
                         imageStyle = "p-0 md:p-2 scale-[1.5]"; 
                       } else if (asset.category === "Item") {
                         imageStyle = "p-12 md:p-20 scale-110"; 
@@ -133,7 +131,7 @@ export default function GameAssets() {
                         <img
                           key={idx}
                           src={img}
-                          style={{ imageRendering: 'pixelated' }} // Menjaga pixel art tetap tajam saat di-zoom
+                          style={{ imageRendering: 'pixelated' }} 
                           className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 ease-in-out ${
                             idx === asset.currentImg ? 'opacity-100' : 'opacity-0'
                           } ${imageStyle}`}
@@ -145,16 +143,17 @@ export default function GameAssets() {
 
                   {asset.images.length > 1 && (
                     <>
+                      {/* Tombol Navigasi - Style & Hover sudah seragam di semua ukuran layar */}
                       <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 md:px-6 pointer-events-none">
                         <button 
                           onClick={() => handlePrev(asset.id)} 
-                          className="pointer-events-auto w-10 h-10 md:w-14 md:h-14 bg-white/60 md:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-gray-900 md:text-white text-xl hover:bg-white hover:text-green-600 transition-all shadow-lg"
+                          className="pointer-events-auto w-10 h-10 md:w-14 md:h-14 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-gray-900 text-xl hover:bg-green-600 hover:text-white transition-all shadow-lg active:scale-95"
                         >
                           ←
                         </button>
                         <button 
                           onClick={() => handleNext(asset.id)} 
-                          className="pointer-events-auto w-10 h-10 md:w-14 md:h-14 bg-white/60 md:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-gray-900 md:text-white text-xl hover:bg-white hover:text-green-600 transition-all shadow-lg"
+                          className="pointer-events-auto w-10 h-10 md:w-14 md:h-14 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-gray-900 text-xl hover:bg-green-600 hover:text-white transition-all shadow-lg active:scale-95"
                         >
                           →
                         </button>
@@ -165,7 +164,7 @@ export default function GameAssets() {
                           <div 
                             key={idx} 
                             className={`h-1 md:h-1.5 rounded-full transition-all duration-300 ${
-                              idx === asset.currentImg ? 'w-6 md:w-8 bg-green-500 md:bg-white' : 'w-1.5 md:w-2 bg-gray-300 md:bg-white/40'
+                              idx === asset.currentImg ? 'w-6 md:w-8 bg-green-500' : 'w-1.5 md:w-2 bg-gray-300'
                             }`} 
                           />
                         ))}

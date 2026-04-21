@@ -49,7 +49,7 @@ export default function Contact() {
                   </div>
                   <div className="flex items-center gap-5 text-white group cursor-default">
                     <div className="w-12 h-12 bg-gray-700 rounded-2xl flex items-center justify-center group-hover:bg-green-600 transition-all">📧</div>
-                    <div><p className="text-gray-400 text-xs">Email</p><p className="text-xl font-bold group-hover:text-green-400">hello@gameassets.com</p></div>
+                    <div><p className="text-gray-400 text-xs">Email</p><p className="text-xl font-bold group-hover:text-green-400">muhammadfiqripratama81@gmail.com</p></div>
                   </div>
                 </div>
               </div>
