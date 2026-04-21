@@ -57,7 +57,7 @@ export default function GameAssets() {
         "Gif_pack/Pop_up.png",
         "Gif_pack/Button_berjajar.png"
       ],
-      specs: ["Format: PNG", "Size: 83,3 KB ", "Pixel: Yes"],
+      specs: ["Format: PNG", "Size: 86,5 KB ", "Pixel: Yes"],
       downloadUrl: "/UI.zip"
     },
     {
@@ -67,7 +67,7 @@ export default function GameAssets() {
       description: "Seluruh asset yang sudah mencangkup, karakter, Environment, Item, dan UI pack yang sudah dikemas dalam satu file zip.",
       currentImg: 0,
       images: ["Gif_pack/Tampilan_Game_Lost_Forest_2.png"],
-      specs: ["Format: PNG", "Size: 125 KB", "Pixel: Yes"],
+      specs: ["Format: PNG", "Size: 784 KB", "Pixel: Yes"],
       downloadUrl: "/Packaging.zip"
     }
   ]);
